@@ -6,6 +6,7 @@ import sys
 import glob
 from shutil import copytree
 
+
 import config_parser
 from config_parser import validate_args as va
 import bookkeeping
@@ -154,7 +155,7 @@ def do_concat(visname, fields, dirs='*MHz'):
     return newvis
 
 def main(args,taskvals):
-
+    logger.debug("args:'{0}':".format(args['config']))
     visname = va(taskvals, 'data', 'vis', str)
     spw = va(taskvals, 'crosscal', 'spw', str, default='')
     nspw = va(taskvals, 'crosscal', 'nspw', int, default='')
