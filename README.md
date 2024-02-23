@@ -4,13 +4,26 @@ The IDIA MeerKAT pipeline is a radio interferometric calibration pipeline design
 
 ## Requirements
 
-This pipeline is designed to run on the Ilifu cluster @ IDIA, making use of SLURM and MPICASA but with this repository fork we wanted to enable this pipeline for a customised HPC facility. In our case this Pipeline has been ported to our computing infrastructure at the espSRC ( Spanish SKA Regional Centre @ IAA-CSCI, Granada) within a cluster with Slurm and MPICASA, and the software containers needed.
+This pipeline is designed to run on the Ilifu cluster @ IDIA, making use of SLURM and MPICASA but with this repository fork **we wanted to enable this pipeline for a customised HPC facility**. In our case this Pipeline has been ported to our HPC computing infrastructure at the espSRC (Spanish SKA Regional Centre @ IAA-CSCI, Granada) within a cluster with Slurm and MPICASA, and the software containers needed.
 
-## Note
+## Note about data
 
 ℹ️ It is not necessary to copy the raw data (i.e. the MS) to your working directory. The first step of the pipeline does this for you by creating an MMS or MS, and does not attempt to manipulate the raw data (see [data format](https://idia-pipelines.github.io/docs/processMeerKAT/Example-Use-Cases/#data-format)).
 
-## 1. Setup the pipeline in your environment
+## Steps
+
+### 0. Clone this repository
+
+Go to your shared folder in your slurm cluster and type:
+
+        git  clone <this repo url>
+
+then 
+
+        cd meerkat-pipeline
+
+
+### 1. Setup the pipeline in your environment
 
 In order to use the `processMeerKAT.py` script, source the `setup.sh` file, which can be done on [ilifu](https://docs.ilifu.ac.za/#/) as
 
