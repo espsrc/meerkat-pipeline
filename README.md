@@ -25,11 +25,15 @@ then
 
 ### 1. Setup the pipeline in your environment
 
-In order to use the `processMeerKAT.py` script, source the `setup.sh` file, which can be done on [ilifu](https://docs.ilifu.ac.za/#/) as
+In order to use the `processMeerKAT.py` script, source the `setup.sh` file (first check the path where you are):
 
-        source /idia/software/pipelines/master/setup.sh
+        pwd
 
-which will add the correct paths to your `$PATH` and `$PYTHONPATH` in order to correctly use the pipeline. You could consider adding this to your `~/.profile` or `~/.bashrc` for future use.
+get this path and paste it in `<pathofcode>`:
+
+        source <pathofcode>/setup.sh
+
+which will add the correct paths to your `$PATH` and `$PYTHONPATH` in order to correctly use the pipeline.
 
 ### 2. Build a config file:
 
@@ -49,8 +53,20 @@ which will add the correct paths to your `$PATH` and `$PYTHONPATH` in order to c
 
         processMeerKAT.py -B -C myconfig.txt -M mydata.ms -I
 
+#### e. Other options and configurations :
+
 This defines several variables that are read by the pipeline while calibrating the data, as well as requesting resources on the cluster. The [config file parameters](https://idia-pipelines.github.io/docs/processMeerKAT/config-files) are described by in-line comments in the config file itself wherever possible. The `[-P --dopol]` option can be used in conjunction with the `[-2 --do2GC]` and `[-I --science_image]` options to enable polarization calibration as well as [self-calibration](https://idia-pipelines.github.io/docs/processMeerKAT/self-calibration-in-processmeerkat) and [science imaging](https://idia-pipelines.github.io/docs/processMeerKAT/science-imaging-in-processmeerkat).
 
+#### Examples :
+
+To create a configuration file for continuum/spectral line processing, self-calibration and science imaging:
+
+        processMeerKAT.py -B -C myconfig.txt -M mydata.ms -2 -I
+
+To create a configuration file  for continuum/spectral line processing just with science imaging: 
+
+        processMeerKAT.py -B -C myconfig.txt -M mydata.ms -I
+        
 ### 3. To run the pipeline:
 
         processMeerKAT.py -R -C myconfig.txt
