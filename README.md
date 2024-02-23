@@ -1,18 +1,14 @@
-<p align="center">
-   <img src="https://raw.githubusercontent.com/idia-pipelines/idia-pipelines.github.io/master/assets/idia_logo.jpg" alt="IDIA pipelines"/>
-</p>
+# The IDIA MeerKAT Pipeline for Custom HPC facilities
 
-# The IDIA MeerKAT Pipeline
-
-The IDIA MeerKAT pipeline is a radio interferometric calibration pipeline designed to process MeerKAT data. **It is under regular development, and so far implements cross-calibration, selfcal-calibration, and science imaging. Please report any issues you find in the [GitHub issues](https://github.com/idia-astro/pipelines/issues).**
+The IDIA MeerKAT pipeline is a radio interferometric calibration pipeline designed to process MeerKAT data.
 
 ## Requirements
 
-This pipeline is designed to run on the Ilifu cluster, making use of SLURM and MPICASA. For other uses, please contact the authors. Currently, use of the pipeline requires access to the Ilifu cloud infrastructure. You can request access using the following [form](http://docs.ilifu.ac.za/#/getting_started/request_access).
+This pipeline is designed to run on the Ilifu cluster @ IDIA, making use of SLURM and MPICASA but with this repository fork we wanted to enable this pipeline for a customised HPC facility. In our case this Pipeline has been ported to our computing infrastructure at the espSRC ( Spanish SKA Regional Centre @ IAA-CSCI, Granada) within a cluster with Slurm and MPICASA, and the software containers needed.
 
-## Quick Start
+## Note
 
-**Note: It is not necessary to copy the raw data (i.e. the MS) to your working directory. The first step of the pipeline does this for you by creating an MMS or MS, and does not attempt to manipulate the raw data (e.g. stored in `/idia/projects` - see [data format](https://idia-pipelines.github.io/docs/processMeerKAT/Example-Use-Cases/#data-format)).**
+ℹ️ It is not necessary to copy the raw data (i.e. the MS) to your working directory. The first step of the pipeline does this for you by creating an MMS or MS, and does not attempt to manipulate the raw data (see [data format](https://idia-pipelines.github.io/docs/processMeerKAT/Example-Use-Cases/#data-format)).
 
 ## 1. Setup the pipeline in your environment
 
