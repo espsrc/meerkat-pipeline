@@ -56,6 +56,7 @@ which will add the correct paths to your `$PATH` and `$PYTHONPATH` in order to c
 
         processMeerKAT.py -B -C myconfig.txt -M mydata.ms -I
 
+
 #### e. Other options and configurations :
 
 This defines several variables that are read by the pipeline while calibrating the data, as well as requesting resources on the cluster. The [config file parameters](https://idia-pipelines.github.io/docs/processMeerKAT/config-files) are described by in-line comments in the config file itself wherever possible. The `[-P --dopol]` option can be used in conjunction with the `[-2 --do2GC]` and `[-I --science_image]` options to enable polarization calibration as well as [self-calibration](https://idia-pipelines.github.io/docs/processMeerKAT/self-calibration-in-processmeerkat) and [science imaging](https://idia-pipelines.github.io/docs/processMeerKAT/science-imaging-in-processmeerkat).
@@ -69,12 +70,103 @@ To create a configuration file for continuum/spectral line processing, self-cali
 To create a configuration file  for continuum/spectral line processing just with science imaging: 
 
         processMeerKAT.py -B -C myconfig.txt -M mydata.ms -I
+
+
+
+#### Note on optional configurations
+Depending on the option you choose, the configuration file (here, i.e.: ``myconfig.txt``)  will change to include the default settings for Self-Calibration and Imaging.
+Here you can see the default settings for each of them:
+
+**Self Calibration: **
+
+```
+[selfcal]
+nloops = 2                        # Number of clean + bdsf loops.
+loop = 0                          # If nonzero, adds this number to nloops to name images or continue previous run
+cell = '1.5arcsec'
+robust = -0.5
+imsize = [6144, 6144]
+wprojplanes = 512
+niter = [10000, 50000, 50000]
+threshold = ['0.5mJy', 10, 10]    # After loop 0, S/N values if >= 1.0, otherwise Jy
+nterms = 2                        # Number of taylor terms
+gridder = 'wproject'
+deconvolver = 'mtmfs'
+calmode = ['','p']                # '' to skip solving (will also exclude mask for this loop), 'p' for phase-only and 'ap' for amplitude and phase
+solint = ['','1min']
+uvrange = ''                      # uv range cutoff for gaincal
+flag = True                       # Flag residual column after selfcal?
+gaintype = 'G'                    # Use 'T' for polarisation on linear feeds (e.g. MeerKAT)
+discard_nloops = 0                # Discard this many selfcal solutions (e.g. from quick and dirty image) during subsequent loops (only considers when calmode !='')
+outlier_threshold = 0.0           # S/N values if >= 1.0, otherwise Jy
+outlier_radius = 0.0              # Radius in degrees for identifying outliers in RACS
+```
+More details on self-calibration: https://idia-pipelines.github.io/docs/processMeerKAT/self-calibration-in-processmeerkat/
+
+**Imaging: **
+
+```
+[image]
+cell = '1.5arcsec'
+robust = -0.5
+imsize = [6144, 6144]
+wprojplanes = 512
+niter = 50000
+threshold = 10                    # S/N value if >= 1.0 and rmsmap != '', otherwise Jy
+multiscale = [0, 5, 10, 15]
+nterms = 2                        # Number of taylor terms
+gridder = 'wproject'
+deconvolver = 'mtmfs'
+restoringbeam = ''
+stokes = 'I'
+pbthreshold = 0.1                 # Threshold below which to mask the PB for PB correction
+pbband = 'LBand'                  # Which band to use to generate the PB - one of "LBand" "SBand" or "UHF"
+mask = ''
+rmsmap = ''
+outlierfile = ''
+```
+
+More details on Science imaging: https://idia-pipelines.github.io/docs/processMeerKAT/science-imaging-in-processmeerkat/
         
-### 3. To run the pipeline:
+### 3. To run the pipeline
+
+⚠️ Before starting, review the configuration files to match your slurm cluster in terms of number of CPUs, tasks per node and available RAM.
+
+Check ``myconfig.txt``: 
+
+```
+...
+[slurm]
+nodes = 3
+ntasks_per_node = 16
+plane = 1
+mem = 24
+partition = 'debug'
+... 
+```
+
+and ``processMeerKAT/processMeerKAT.py``:
+
+```
+...
+#Set global limits for current cluster configuration
+TOTAL_NODES_LIMIT = 3
+CPUS_PER_NODE_LIMIT = 16
+NTASKS_PER_NODE_LIMIT = CPUS_PER_NODE_LIMIT
+MEM_PER_NODE_GB_LIMIT = 24 
+MEM_PER_NODE_GB_LIMIT_HIGHMEM = 26
+...
+```
+
+Once verified, type the following to create the configuration files according to this configuration: 
 
         processMeerKAT.py -R -C myconfig.txt
 
-This will create `submit_pipeline.sh`, which you can then run with `./submit_pipeline.sh` to submit all pipeline jobs to the SLURM queue.
+⚠️⚠️⚠️ 
+This will not run the pipeline, it will just create the files so you can manually upload them to slurm.
+⚠️⚠️⚠️
+
+With this command it will create `submit_pipeline.sh`, which you can then run with `./submit_pipeline.sh` to submit all pipeline jobs to the SLURM queue.
 
 Other convenience scripts are also created that allow you to monitor and (if necessary) kill the jobs.
 
@@ -83,7 +175,11 @@ Other convenience scripts are also created that allow you to monitor and (if nec
 * `killJobs.sh` kills all the jobs from the current run of the pipeline, ignoring any other (unrelated) jobs you might have running.
 * `cleanup.sh` wipes all the intermediate data products created by the pipeline. This is intended to be launched after the pipeline has run and the output is verified to be good.
 
-For help, run `processMeerKAT.py -h`, which provides a brief description of all the [command line options](https://idia-pipelines.github.io/docs/processMeerKAT/using-the-pipeline#command-line-options).
+For more configuration options within the command line, run `processMeerKAT.py -h`, which provides a brief description of all the [command line options](https://idia-pipelines.github.io/docs/processMeerKAT/using-the-pipeline#command-line-options).
+
+## Debugging
+
+
 
 ## Using multiple spectral windows (new in v1.1)
 
