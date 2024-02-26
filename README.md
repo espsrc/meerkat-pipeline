@@ -1,6 +1,9 @@
+![image](https://github.com/espsrc/meerkat-pipeline/assets/7033451/b0d53933-7902-4ea5-a294-7b8df66822d5)
+
 # The IDIA MeerKAT Pipeline for Custom HPC facilities
 
 The IDIA MeerKAT pipeline is a radio interferometric calibration pipeline designed to process MeerKAT data.
+
 
 ## Requirements
 
