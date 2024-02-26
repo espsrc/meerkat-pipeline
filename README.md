@@ -179,6 +179,73 @@ For more configuration options within the command line, run `processMeerKAT.py -
 
 ## Debugging
 
+For debugging the status of jobs, you can find in the ``logs/`` directory where you have the pipeline, the set of processes that have run or are running.
+
+For example, for each part of the pipeline you will see (templates are ```<operation>_<job_id>.<output>```):
+
+**Partition:**
+```
+partition-3105_0.err
+partition-3105_0.out
+partition-3105_1.err
+partition-3105_1.out
+partition-3105_10.err
+partition-3105_10.out
+partition-3105_2.err
+partition-3105_2.out
+partition-3105_3.err
+partition-3105_3.out
+partition-3105_4.err
+partition-3105_4.out
+partition-3105_5.err
+partition-3105_5.out
+partition-3105_6.err
+partition-3105_6.out
+partition-3105_7.err
+partition-3105_7.out
+partition-3105_8.err
+partition-3105_8.out
+partition-3105_9.err
+partition-3105_9.out
+```
+
+**Concat:**
+
+```
+concat-3217.casa
+concat-3217.err
+concat-3217.mpi
+concat-3217.out
+```
+
+**PlotCalibration SPW:**
+
+```
+plotcal_spw-3218.casa
+plotcal_spw-3218.err
+plotcal_spw-3218.mpi
+plotcal_spw-3218.out
+```
+
+**SelfCalibration:**
+```
+selfcal_part1-3230.casa
+selfcal_part1-3230.err
+selfcal_part1-3230.out
+selfcal_part2-3231.casa
+selfcal_part2-3231.err
+selfcal_part2-3231.out
+```
+
+**Science Image:**
+
+```
+science_image-3232.out
+science_image-3232.casa
+science_image-3232.err
+```
+
+
 
 
 ## Using multiple spectral windows (new in v1.1)
