@@ -7,7 +7,7 @@ The IDIA MeerKAT pipeline is a radio interferometric calibration pipeline design
 
 ## Requirements
 
-This pipeline is designed to run on the Ilifu cluster @ IDIA, making use of SLURM and MPICASA but with this repository fork **we wanted to enable this pipeline for a customised HPC facility**. In our case this Pipeline has been ported to our HPC computing infrastructure at the espSRC (Spanish SKA Regional Centre @ IAA-CSCI, Granada) within a cluster with Slurm and MPICASA, and the software containers needed.
+💻 This pipeline is designed to run on the Ilifu cluster @ IDIA, making use of SLURM and MPICASA but with this repository fork **we wanted to enable this pipeline for a customised HPC facility**. In our case this Pipeline has been ported to our HPC computing infrastructure at the espSRC (Spanish SKA Regional Centre @ IAA-CSCI, Granada) within a cluster with Slurm and MPICASA, and the software containers needed.
 
 ## Note about data
 
@@ -164,16 +164,21 @@ Once verified, type the following to create the configuration files according to
 
 ⚠️⚠️⚠️ 
 This will not run the pipeline, it will just create the files so you can manually upload them to slurm.
-⚠️⚠️⚠️
 
 With this command it will create `submit_pipeline.sh`, which you can then run with `./submit_pipeline.sh` to submit all pipeline jobs to the SLURM queue.
 
+✈️ To run the pipeline, type the following:
+
+        ./submit_pipeline.sh
+
+You can check the status of the tasks with ``squeue`` or to use ``watch squeue`` to review the status every 2 seconds.
+
 Other convenience scripts are also created that allow you to monitor and (if necessary) kill the jobs.
 
-* `summary.sh` provides a brief overview of the status of the jobs in the pipeline
-* `findErrors.sh` checks the log files for commonly reported errors (after the jobs have run)
-* `killJobs.sh` kills all the jobs from the current run of the pipeline, ignoring any other (unrelated) jobs you might have running.
-* `cleanup.sh` wipes all the intermediate data products created by the pipeline. This is intended to be launched after the pipeline has run and the output is verified to be good.
+* `./summary.sh` provides a brief overview of the status of the jobs in the pipeline
+* `./findErrors.sh` checks the log files for commonly reported errors (after the jobs have run)
+* `./killJobs.sh` kills all the jobs from the current run of the pipeline, ignoring any other (unrelated) jobs you might have running.
+* `./cleanup.sh` wipes all the intermediate data products created by the pipeline. This is intended to be launched after the pipeline has run and the output is verified to be good.
 
 For more configuration options within the command line, run `processMeerKAT.py -h`, which provides a brief description of all the [command line options](https://idia-pipelines.github.io/docs/processMeerKAT/using-the-pipeline#command-line-options).
 
@@ -244,8 +249,6 @@ science_image-3232.out
 science_image-3232.casa
 science_image-3232.err
 ```
-
-
 
 
 ## Using multiple spectral windows (new in v1.1)
