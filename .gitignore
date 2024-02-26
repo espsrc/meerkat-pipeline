@@ -1,6 +1,7 @@
 *.pyc
 *.egg-info
 *.swp # vim swap files
+*.log
 
 build/
 dist/
