@@ -77,7 +77,7 @@ To create a configuration file  for continuum/spectral line processing just with
 Depending on the option you choose, the configuration file (here, i.e.: ``myconfig.txt``)  will change to include the default settings for Self-Calibration and Imaging.
 Here you can see the default settings for each of them:
 
-**Self Calibration: **
+**Self Calibration:**
 
 ```
 [selfcal]
@@ -103,7 +103,7 @@ outlier_radius = 0.0              # Radius in degrees for identifying outliers i
 ```
 More details on self-calibration: https://idia-pipelines.github.io/docs/processMeerKAT/self-calibration-in-processmeerkat/
 
-**Imaging: **
+**Imaging:**
 
 ```
 [image]
