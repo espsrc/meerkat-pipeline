@@ -167,7 +167,17 @@ This will not run the pipeline, it will just create the files so you can manuall
 
 With this command it will create `submit_pipeline.sh`, which you can then run with `./submit_pipeline.sh` to submit all pipeline jobs to the SLURM queue.
 
-✈️ To run the pipeline, type the following:
+🎱 Another verification before run the pipeline with `submit_pipeline.sh` is the next:
+
+- Review ``partition.sbatch`` in terms of CPU, Tasks, etc.
+- Review ``concat.sbatch`` in terms of CPU, Tasks, etc.
+- Review ``plotcal_spw.sbatch`` in terms of CPU, Tasks, etc.
+- Review ``selfcal_part1.sbatch`` in terms of CPU, Tasks, etc.
+- Review ``selfcal_part2.sbatch`` in terms of CPU, Tasks, etc.
+- Review ``science_image.sbatch`` in terms of CPU, Tasks, etc.
+
+
+✈️✈️✈️  To run the pipeline, type the following:
 
         ./submit_pipeline.sh
 
